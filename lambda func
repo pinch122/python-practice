@@ -1,0 +1,20 @@
+#def double (x):
+     #return x+5
+#print(double(5))
+ # instaed we can write
+x = lambda a : a + 10
+print(x(5))
+
+#just an altenative for def func
+
+# can take multiple values as well
+avg = lambda x,y: (x + y)/ 2 
+print(avg(3,3)) 
+
+
+# you can also run a lambda inside a function
+
+def fucn(fx,value):
+    return 10 + fx(value)
+double = lambda x:x*x
+print(fucn(double,2))
