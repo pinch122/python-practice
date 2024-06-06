@@ -1,0 +1,8 @@
+x = input("name:")
+
+if x == "tim":
+    print(" how are you")
+elif x== "jhon":
+    print("good bye")
+else:
+    print("who are you ")
