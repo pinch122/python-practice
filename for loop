@@ -1,0 +1,15 @@
+#1
+names = ["ananjay","namradha","ayham","mohit"]
+for i in names:
+    print(i)
+    # if you wanna print them indvi
+    for x in i:
+        print(x)
+
+ # to create combinations
+adj = ["red", "big", "tasty"]
+fruits = ["apple", "banana", "cherry"]
+
+for x in adj:
+  for y in fruits:
+    print(x, y)
