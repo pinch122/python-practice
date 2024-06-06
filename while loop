@@ -26,4 +26,3 @@ x = int(input('enter numbr greater then i :'))
 while i<x:
     print(i)
     i = i+1
-hello world
