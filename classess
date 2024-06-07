@@ -10,3 +10,14 @@ p1 = Person("John", 36)
 print(p1)   
 
 # you can use any other name instead of self 
+#2 one more example
+class Places:
+    def __init__(self, name, landmark):
+        self.name = name
+        self.landmark = landmark
+
+    def myfunc(self):
+        print("I stay at " + self.name + " and it's close to " + self.landmark)
+
+p1 = Places("Bangalore", "Srinagar")
+p1.myfunc()
