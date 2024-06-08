@@ -1,3 +1,6 @@
+# basics of exception handling
+
+
 a = int(input("Enter a number: "))
 print(f"Multiplication table of {a} is:")
 
