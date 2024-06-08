@@ -3,7 +3,7 @@
 class AbstractShape(ABC):
     @abstractmethod
     def area(self):
-        passss
+        pass
     
     @abstractmethod
     def perimeter(self):
