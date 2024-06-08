@@ -1,0 +1,19 @@
+class Employee:
+    def __init__(self,name,id):
+        self.name = name
+        self.id = id
+
+    def showdetails(self):
+        print(f"the name of employ: {self.name} and id is: {self.id} ")
+
+class Programmer(Employee):
+    def showLanguage(self):
+        print("they use python")
+
+
+e1 = Employee("rohan",234)
+e2 = Programmer("hrry",23)
+e1.showdetails()
+e2.showdetails()
+e2.showLanguage()
+
