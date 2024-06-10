@@ -1,0 +1,162 @@
+
+#dict
+thisdict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+print(thisdict)
+
+
+#printing certain value
+thisdict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+print(thisdict["brand"])
+
+#duplicats will overwrite the current value
+thisdict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964,
+  "year": 2020
+}
+print(thisdict)
+
+#data types
+
+  "brand": "Ford",
+  "electric": False,
+  "year": 1964,
+  "colors": ["red", "white", "blue"]
+}
+
+#dict constructor
+thisdict = dict(name = "John", age = 36, country = "Norway")
+print(thisdict)
+
+#accesing items from dict
+
+car = {
+"brand": "Ford",
+"model": "Mustang",
+"year": 1964
+}
+
+x = car.keys()
+
+print(x) #before the change
+
+car["color"] = "white"
+
+print(x) #after the change
+
+#adding new elements
+
+car = {
+"brand": "Ford",
+"model": "Mustang",
+"year": 1964
+}
+
+x = car.values()
+
+print(x) 
+
+car["color"] = "red"
+
+print(x)
+
+# to check
+
+thisdict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+if "model" in thisdict:
+  print("yes its there")
+
+# adding element
+
+thisdict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+thisdict["color"] = "red"
+print(thisdict)
+
+#to remove elemets
+thisdict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+thisdict.pop("model")
+print(thisdict)
+
+#loop in dict
+
+for x in thisdict:
+  print(x)
+
+#loop in dict values
+
+for x in thisdict:
+  print(thisdict[x])
+
+#making a copy of dict
+
+thisdict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+mydict = thisdict.copy()
+print(mydict)
+
+#dictionary that contains 3 dict
+
+myfamily = {
+  "child1" : {
+    "name" : "Emil",
+    "year" : 2004
+  },
+  "child2" : {
+    "name" : "Tobias",
+    "year" : 2007
+  },
+  "child3" : {
+    "name" : "Linus",
+    "year" : 2011
+  }
+}
+
+#hree dictionaries, then create one dictionary that will contain the other three dictionaries
+
+
+child1 = {
+  "name" : "Emil",
+  "year" : 2004
+}
+child2 = {
+  "name" : "Tobias",
+  "year" : 2007
+}
+child3 = {
+  "name" : "Linus",
+  "year" : 2011
+}
+
+myfamily = {
+  "child1" : child1,
+  "child2" : child2,
+  "child3" : child3
+}
+
+#now on how to access them 
+
+print(myfamily["child2"]["name"])
