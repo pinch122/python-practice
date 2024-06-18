@@ -1,0 +1,60 @@
+-- DQL
+-- DQL is a subset of SQL used for querying and retrieving data from a database. 
+-- Advanced DQL commands such as GROUP BY, ORDER BY, and HAVING.
+
+-- 1. GROUP BY: Used to group rows that have the same values in specified columns into summary rows.
+-- 2. ORDER BY: Used to sort the result set of a query by one or more columns.
+-- 3. HAVING: Used to filter groups based on a condition, often used with GROUP BY.
+
+CREATE DATABASE School;
+
+USE School;
+
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),
+    age INT,
+    gender VARCHAR(10)
+);
+
+
+INSERT INTO students (name, age, gender) VALUES
+('pinchu', 18, 'Female'),
+('puneet', 22, 'Female'),
+('Shiv', 20, 'Male');
+
+
+
+--  GROUP BY
+-- Find the number of students of each gender.
+SELECT gender, COUNT(*)
+FROM students
+GROUP BY gender;
+
+-- ORDER BY
+-- Fetch all student names and ages, ordered by age in descending order.
+SELECT name, age
+FROM students
+ORDER BY age DESC;
+
+-- HAVING with GROUP BY
+-- Find the number of students of each gender where the count of students is greater than 1.
+SELECT gender, COUNT(*)
+FROM students
+GROUP BY gender
+HAVING COUNT(*) > 1;
+
+--  GROUP BY and ORDER BY
+-- Find the average age of students for each gender and order the result by average age.
+SELECT gender, AVG(age) 
+FROM students
+GROUP BY gender
+ORDER BY average_age;
+
+--  Using WHERE with GROUP BY, HAVING, and ORDER BY
+SELECT gender, COUNT(*) 
+FROM students
+WHERE name IN ('pinchu', 'puneet')
+GROUP BY gender
+HAVING COUNT(*) > 1
+ORDER BY student_count DESC;
