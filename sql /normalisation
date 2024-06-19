@@ -1,0 +1,96 @@
+- Normalization Example: School Database
+use school;
+CREATE TABLE Unnormalized (
+    student_id INT,
+    student_name VARCHAR(50),
+    age INT,
+    gender VARCHAR(10),
+    course1 VARCHAR(50),
+    course2 VARCHAR(50),
+    course3 VARCHAR(50),
+    PRIMARY KEY (student_id)
+);
+
+-- Insert data into the unnormalized table
+INSERT INTO Unnormalized (student_id, student_name, age, gender, course1, course2, course3) VALUES
+(1, 'pinchu', 18, 'Female', 'Mathematics', 'Science', 'English'),
+(2, 'Sunita', 19, 'Female', 'Science', 'English', NULL),
+(3, 'adheena', 20, 'Male', 'Mathematics', NULL, NULL);
+
+-- Step 2: First Normal Form (1NF)
+CREATE TABLE Students1NF (
+    student_id INT,
+    student_name VARCHAR(50),
+    age INT,
+    gender VARCHAR(10),
+    course_name VARCHAR(50),
+    PRIMARY KEY (student_id, course_name)
+);
+
+-- Decompose into 1NF
+INSERT INTO Students1NF (student_id, student_name, age, gender, course_name) VALUES
+(1, 'Arpita', 18, 'Female', 'Mathematics'),
+(1, 'Arpita', 18, 'Female', 'Science'),
+(1, 'Arpita', 18, 'Female', 'English'),
+(2, 'Sunita', 19, 'Female', 'Science'),
+(2, 'Sunita', 19, 'Female', 'English'),
+(3, 'Shivam', 20, 'Male', 'Mathematics');
+
+-- Step 3: Second Normal Form (2NF)
+-- Remove partial dependencies
+CREATE TABLE Students2NF (
+    student_id INT PRIMARY KEY,
+    student_name VARCHAR(50),
+    age INT,
+    gender VARCHAR(10)
+);
+
+CREATE TABLE Courses2NF (
+    course_name VARCHAR(50),
+    student_id INT,
+    PRIMARY KEY (course_name, student_id),
+    FOREIGN KEY (student_id) REFERENCES Students2NF(student_id)
+);
+
+-- Decompose into 2NF
+INSERT INTO Students2NF (student_id, student_name, age, gender) VALUES
+(1, 'Arpita', 18, 'Female'),
+(2, 'Sunita', 19, 'Female'),
+(3, 'Shivam', 20, 'Male');
+
+INSERT INTO Courses2NF (course_name, student_id) VALUES
+('Mathematics', 1),
+('Science', 1),
+('English', 1),
+('Science', 2),
+('English', 2),
+('Mathematics', 3);
+
+-- Step 4: Third Normal Form (3NF)
+-- Remove transitive dependencies
+CREATE TABLE Courses3NF (
+    course_id INT PRIMARY KEY,
+    course_name VARCHAR(50)
+);
+
+CREATE TABLE Enrollments3NF (
+    student_id INT,
+    course_id INT,
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES Students2NF(student_id),
+    FOREIGN KEY (course_id) REFERENCES Courses3NF(course_id)
+);
+
+-- Decompose into 3NF
+INSERT INTO Courses3NF (course_id, course_name) VALUES
+(101, 'Mathematics'),
+(102, 'Science'),
+(103, 'English');
+
+INSERT INTO Enrollments3NF (student_id, course_id) VALUES
+(1, 101),
+(1, 102),
+(1, 103),
+(2, 102),
+(2, 103),
+(3, 101);
