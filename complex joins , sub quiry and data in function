@@ -1,0 +1,72 @@
+-- Complex Join
+-- List all students along with their courses and the corresponding teacher
+SELECT 
+    Students.name AS student_name, 
+    Courses.course_name, 
+    Teachers.teacher_name
+FROM 
+    Students
+JOIN 
+    Enrollments ON Students.student_id = Enrollments.student_id
+JOIN 
+    Courses ON Enrollments.course_id = Courses.course_id
+JOIN 
+    CourseTeachers ON Courses.course_id = CourseTeachers.course_id
+JOIN 
+    Teachers ON CourseTeachers.teacher_id = Teachers.teacher_id;
+
+-- Subquery example
+-- List students who are enrolled in more than one course
+SELECT 
+    name
+FROM 
+    Students
+WHERE 
+    student_id IN (
+        SELECT 
+            student_id
+        FROM 
+            Enrollments
+        GROUP BY 
+            student_id
+        HAVING 
+            COUNT(course_id) > 1
+    );
+
+-- Date-Time Functions example
+-- List all enrollments with the duration since the enrollment date
+SELECT 
+    student_id,
+    course_id,
+    enrollment_date,
+    DATEDIFF(CURRENT_DATE, enrollment_date) AS days_since_enrollment
+FROM 
+    Enrollments;
+
+-- Find the average age of students enrolled in each course
+SELECT 
+    Courses.course_name,
+    AVG(Students.age) AS average_age
+FROM 
+    Enrollments
+JOIN 
+    Students ON Enrollments.student_id = Students.student_id
+JOIN 
+    Courses ON Enrollments.course_id = Courses.course_id
+GROUP BY 
+    Courses.course_name;
+
+-- Use a subquery to find the most recent enrollment date for each student
+SELECT 
+    student_id,
+    (SELECT MAX(enrollment_date) FROM Enrollments E WHERE E.student_id = S.student_id) AS most_recent_enrollment
+FROM 
+    Students S;
+
+-- Use date-time functions to format and display enrollment dates
+SELECT 
+    student_id,
+    course_id,
+    DATE_FORMAT(enrollment_date, '%W, %M %d, %Y') AS formatted_enrollment_date
+FROM 
+    Enrollments;
