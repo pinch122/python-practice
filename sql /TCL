@@ -1,0 +1,90 @@
+--FOR EXAMPLE I HAVE TAKEN A RANDOM DATA BASE
+
+
+-- Create the database
+CREATE DATABASE TransactionExample;
+USE TransactionExample;
+
+-- Create a Customer table
+CREATE TABLE Customer (
+    CustomerID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(50),
+    Email VARCHAR(50) UNIQUE,
+    PhoneNumber VARCHAR(15) UNIQUE,
+    Address VARCHAR(100)
+);
+
+-- Create an Orders table
+CREATE TABLE Orders (
+    OrderID INT AUTO_INCREMENT PRIMARY KEY,
+    CustomerID INT,
+    OrderDate DATE,
+    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
+);
+
+-- Create an OrderDetails table
+CREATE TABLE OrderDetails (
+    OrderDetailID INT AUTO_INCREMENT PRIMARY KEY,
+    OrderID INT,
+    ProductID INT,
+    Quantity INT,
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
+);
+
+
+-- First i have to start transaction
+
+START TRANSACTION;
+
+INSERT INTO CUSTOMER (Name, Email, PhoneNumber, Address)
+VALUES ('John Doe', 'john@example.com', '1234567890', '123 Elm St.');
+--INSERTED RANDOM VALUES
+-- to finalise and change values
+COMMIT; 
+
+-- starting another transaction
+
+START TRANSACTION;
+
+
+INSERT INTO Customer (Name, Email, PhoneNumber, Address)
+VALUES ('Jane Smith', 'jane@example.com', '0987654321', '456 Pine St.');
+
+-- we use this to undo mistake bascially
+ROLLBACK;
+
+-- example two
+
+START TRANSACTION;
+
+-- Insert a new order
+INSERT INTO Orders (CustomerID, OrderDate)
+VALUES (1, '2023-06-23');
+
+-- its like a check point to come back too if you madde a mistake
+SAVEPOINT savepoint1;
+
+
+INSERT INTO OrderDetails (OrderID, ProductID, Quantity)
+VALUES (1, 101, 10);
+
+-- go to the savepoint
+ROLLBACK TO SAVEPOINT savepoint1;
+
+-- example three
+
+
+-- Commit the transaction
+COMMIT;-- Start a transaction with specific characteristics
+START TRANSACTION;
+
+-- Set the transaction to be read-only
+SET TRANSACTION READ ONLY;
+
+-- Execute a select statement (no updates allowed in this transaction)
+SELECT * FROM Customer;
+
+-- Commit the transaction
+COMMIT;
+ -- it sets the current tranaction to read only
+
