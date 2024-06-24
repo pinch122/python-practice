@@ -1,0 +1,43 @@
+-- so its like a virtual table 
+
+-- making a view
+
+
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+
+-- example creating a database to use as example 
+
+-- Create the database and table
+CREATE DATABASE ViewExample;
+USE ViewExample;
+
+CREATE TABLE Products (
+    ProductID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(50),
+    Price DECIMAL(10, 2),
+    Stock INT,
+    IsActive BOOLEAN
+);
+
+
+INSERT INTO Products (Name, Price, Stock, IsActive)
+VALUES
+('Product A', 19.99, 100, TRUE),
+('Product B', 29.99, 0, FALSE),
+('Product C', 9.99, 50, TRUE);
+
+-- Create a view for active products
+
+CREATE VIEW ActiveProducts AS
+SELECT ProductID, Name, Price, Stock
+FROM Products
+WHERE IsActive = TRUE;
+
+-- select from active products to enquire
+
+
+SELECT * FROM ActiveProducts;
