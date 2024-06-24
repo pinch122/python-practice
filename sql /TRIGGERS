@@ -1,0 +1,61 @@
+-- creating a random database 
+
+
+CREATE DATABASE TriggerExample;
+USE TriggerExample;
+
+-- Create a Customer table
+CREATE TABLE Customer (
+    CustomerID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(50),
+    Email VARCHAR(50) UNIQUE,
+    PhoneNumber VARCHAR(15) UNIQUE,
+    Address VARCHAR(100)
+);
+
+-- Create an Orders table
+CREATE TABLE Orders (
+    OrderID INT AUTO_INCREMENT PRIMARY KEY,
+    CustomerID INT,
+    OrderDate DATE,
+    Status VARCHAR(20),
+    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
+);
+
+-- Create an OrderAudit table to track changes
+CREATE TABLE OrderAudit (
+    AuditID INT AUTO_INCREMENT PRIMARY KEY,
+    OrderID INT,
+    OldStatus VARCHAR(20),
+    NewStatus VARCHAR(20),
+    ChangeDate DATETIME,
+    UpdatedBy VARCHAR(50) -- To track who made the change
+);
+
+-- it will make changs in orderaudit if when changes occururs in orders 
+
+CREATE TRIGGER after_order_update
+AFTER UPDATE ON Orders
+FOR EACH ROW
+BEGIN
+    INSERT INTO OrderAudit (OrderID, OldStatus, NewStatus, ChangeDate, UpdatedBy)
+    VALUES (OLD.OrderID, OLD.Status, NEW.Status, NOW(), 'system_user'); -- 'system_user' can be replaced with the actual user info
+END;
+-- we have to insert valuse now
+
+INSERT INTO Customer (Name, Email, PhoneNumber, Address)
+VALUES ('John Doe', 'john@example.com', '1234567890', '123 Elm St.');
+
+-- Insert a sample order
+INSERT INTO Orders (CustomerID, OrderDate, Status)
+VALUES (1, '2023-06-23', 'Pending');
+
+-- Updating the order status
+UPDATE Orders
+SET Status = 'Shipped'
+WHERE OrderID = 1;
+
+
+-- Select all records from OrderAudit to verify the audit trail
+SELECT * FROM OrderAudit;
+
