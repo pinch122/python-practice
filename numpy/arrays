@@ -1,0 +1,105 @@
+#NumPy is a Python library used for working with arrays.
+
+#NumPy aims to provide an array object that is up to 50x faster than traditional Python lists.
+
+#The array object in NumPy is called ndarray
+
+#NumPy arrays are stored at one continuous place in memory unlike lists, so processes can access and manipulate them very efficiently.
+
+
+
+#using tuple to create num py array
+
+import numpy as np
+
+arr = np.array((1, 2, 3, 4, 5))
+
+print(arr)
+
+#0-D Arrays
+
+import numpy as np
+
+arr = np.array(42)
+
+print(arr)
+
+# 1-D Arrays
+
+import numpy as np
+
+ar = np.array([1,2,3,4,5])
+
+print(arr)
+
+# 2-D Arrays
+
+import numpy as np
+
+arr = np.array([[1, 2, 3], [4, 5, 6]])
+
+print(arr)
+
+#3-d aray
+
+import numpy as np
+
+arr = np.array([[[1, 2, 3], [4, 5, 6]], [[1, 2, 3], [4, 5, 6]]])
+
+print(arr)
+
+# we use ndim attribute  to tell us which dimensions the array is 
+
+
+# for example
+
+a = np.array([[[1, 2, 3], [4, 5, 6]], [[1, 2, 3], [4, 5, 6]]])
+
+
+print(a.ndim)
+
+# output will come out to be 4
+
+# Create a 2D array of ones with shape (3, 4)
+# this will create an array of metrcis 3 and 4 of ones
+
+b = np.ones((3, 4))
+print(b)
+
+# Create a sequence from 0 to 9
+# it will arrange the numbers in ascending order 
+
+a = np.arange(10)
+print(a)  
+
+# it will print numbers w a gap of 2
+# works just like for loop 
+b = np.arange(2, 11, 2)
+print(b)  
+
+# what this does is that it divides the numebr 5 times among 0 and 1
+
+a = np.linspace(0, 1, 5)
+print(a) 
+
+# Create a 2x2 identity matrix
+a = np.eye(2)
+print(a)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
