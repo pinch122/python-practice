@@ -1,0 +1,171 @@
+what is panda?
+
+Pandas is a Python library used for working with data sets.
+It has functions for analyzing, cleaning, exploring, and manipulating data.
+
+Why Use Pandas?
+
+Pandas allows us to analyze big data and make conclusions based on statistical theories.
+
+What Can Pandas Do?
+Is there a correlation between two or more columns?
+What is average value?
+Max value?
+Min value?
+
+
+
+
+
+
+
+
+
+# importing data 
+import pandas as pd
+
+mydataset = {
+  'cars': ["BMW", "Volvo", "Ford"],
+  'passings': [3, 7, 2]
+}
+
+myvar = pd.DataFrame(mydataset)
+
+print(myvar)
+
+
+
+
+
+#creating a simple panda from a list 
+import pandas as pd
+
+a = [1, 7, 2]
+
+myvar = pd.Series(a)
+
+print(myvar)
+
+
+
+
+
+
+# Create your own labels:
+
+import pandas as pd
+
+a = [1, 7, 2]
+
+myvar = pd.Series(a, index = ["x", "y", "z"])
+
+print(myvar)
+
+
+
+
+# creating simple panda from dictionary 
+
+import pandas as pd
+
+calories = {"day1": 420, "day2": 380, "day3": 390}
+
+myvar = pd.Series(calories)
+
+print(myvar)
+
+
+
+
+# creating series when something is specified
+
+import pandas as pd
+
+calories = {"day1": 420, "day2": 380, "day3": 390}
+
+myvar = pd.Series(calories, index = ["day1", "day2"])
+
+print(myvar)
+
+#output
+
+day1    420
+day2    380
+dtype: int64
+
+
+DataFrames:
+Data sets in Pandas are usually multi-dimensional tables, called DataFrames.
+
+import pandas as pd
+
+data = {
+  "calories": [420, 380, 390],
+  "duration": [50, 40, 45]
+}
+
+myvar = pd.DataFrame(data)
+
+print(myvar)
+
+#output
+   calories  duration
+0       420        50
+1       380        40
+2       390        45
+
+# if you want to locate a row you can use 
+print(df.loc[0])
+
+#multiple rows then 
+
+print(df.loc[[0, 1]])
+
+
+
+
+
+
+
+
+
+example
+
+import pandas as pd
+
+data = {
+  "calories": [420, 380, 390],
+  "duration": [50, 40, 45]
+}
+
+df = pd.DataFrame(data, index = ["day1", "day2", "day3"])
+
+print(df) 
+
+#cN USE NAME TO LOCATE AS WELL
+print(df.loc["day2"])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
